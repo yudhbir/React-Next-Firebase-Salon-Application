@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import { AuthProvider } from '../contexts/auth'
+import { AuthProvider,ProtectRoute } from '../contexts/auth'
 import Frontend from '../components/layout/frontend';
 
 function MyApp({ Component, pageProps }) {

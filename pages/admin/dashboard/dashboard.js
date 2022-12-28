@@ -1,4 +1,5 @@
 import Backend from '../../../components/layout/backend';
+import { ProtectRoute } from '../../../contexts/auth';
 const dashboard = () => {
    
 return (
@@ -353,6 +354,6 @@ dashboard.getLayout = function getLayout(page) {
     return (
         <Backend>{page}</Backend>
     )
-  }
+}
 
 export default dashboard;

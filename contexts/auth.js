@@ -1,4 +1,4 @@
-import React, { createContext, useState} from 'react'
+import React, { createContext, useState,useEffect} from 'react'
 //api here is an axios instance which has the baseURL set according to the env.
 import { app } from './config';
 import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     const logout = (email, password) => {
         const auth = getAuth();
         signOut(auth).then(() => {
-            sessionStorage.removeItem("Auth_Token");
+            localStorage.removeItem("Auth_Token");
             setUser(null);        
             window.location.pathname = '/users/login'
         }).catch((error) => {
@@ -52,9 +52,6 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
-
-
-
 // export const useAuth = () => useContext(AuthContext);
 
 export const registerUser=(userfrm)=>{
@@ -74,11 +71,13 @@ export function validate_authentication(){
         window.location.pathname = '/admin/adminlogin'
     }  
 }
-// export const ProtectRoute = ({ children }) => {
-//     const useAuth =  useContext(AuthContext)
-//     const { isAuthenticated, isLoading } = useAuth;
-//     if (isLoading || (!isAuthenticated && window.location.pathname !== '/login')){
-//       return <LoadingScreen />; 
-//     }
-//     return children;
-//   };
+export const ProtectRoute = ({ children }) => {
+    if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('Auth_Token')    
+        if (!!token) {
+            return children;
+        }else{
+            window.location.pathname = '/admin/adminlogin'
+        }
+    }
+  };
