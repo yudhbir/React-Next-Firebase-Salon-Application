@@ -12,9 +12,7 @@ function MyApp({ Component, pageProps }) {
 
   return renderWithLayout(
     <AuthProvider>
-      {/* <ProtectRoute> */}
         <Component {...pageProps} />
-      {/* </ProtectRoute> */}
     </AuthProvider>
   );
 }
