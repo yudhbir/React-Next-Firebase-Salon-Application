@@ -6,8 +6,6 @@ import {useAuth,registerUser} from '../../contexts/auth'
 import { useContext,useEffect } from 'react';
 import { AuthContext,validate_authentication } from '../../contexts/auth'
 
-import {encrypt} from '../../helpers/common';
-
 const schema = Joi.object({
     email: Joi.string().email({tlds:{allow: false}}).required(),
     password: Joi.string().required(),

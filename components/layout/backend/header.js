@@ -22,12 +22,12 @@ export default function header() {
                         </a>
                       </div>{/*//col*/}
                       <div className="search-mobile-trigger d-sm-none col">
-                        <i className="search-mobile-trigger-icon fas fa-search"></i>
+                        <i className="search-mobile-trigger-icon fa fa-search"></i>
                       </div>{/*//col*/}
                       <div className="app-search-box col">
                         <form className="app-search-form">   
                           <input type="text" placeholder="Search..." name="search" className="form-control search-input" />
-                          <button type="submit" className="btn search-btn btn-primary" value="Search"><i className="fas fa-search" /></button> 
+                          <button type="submit" className="btn search-btn btn-primary" value="Search"><i className="fa fa-search" /></button> 
                         </form>
                       </div>{/*//app-search-box*/}
                       <div className="app-utilities col-auto">

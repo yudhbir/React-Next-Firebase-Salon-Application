@@ -1,8 +1,12 @@
 import Header from './backend/header';
-import Navigation from './backend/navigation';
 import Footer from './backend/footer';
 import Head from "next/head";
+import { useEffect } from 'react';
+import { validate_authentication } from '../../contexts/auth';
 export default function backend({ children }) {
+  useEffect(() => {
+    validate_authentication();
+  });
     return (
       <>
         <div>
@@ -12,11 +16,9 @@ export default function backend({ children }) {
               <meta content="" name="keywords" />
               <meta content="" name="description" />
               <link id="theme-style" rel="stylesheet" href="/assets/css/portal.css"></link>
-              <link rel="stylesheet" href="/assets/css/fontawesome.min.css"></link>
+              <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.css"></link>
               <script src="/assets/plugins/popper.min.js"></script>
-              <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-              <script src="/assets/plugins/chart.js/chart.min.js"></script> 
-              <script src="/assets/js/index-charts.js"></script>           
+              <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>                      
             </Head>
             <div className="app"> 
                 <Header />
@@ -24,6 +26,8 @@ export default function backend({ children }) {
                         <main>{children}</main>
                     </div>
                 <Footer />
+                <script src="/assets/plugins/chart.js/chart.min.js"></script> 
+                <script src="/assets/js/index-charts.js"></script>   
                 <script src="/assets/js/app.js"></script>
             </div>
           </div>

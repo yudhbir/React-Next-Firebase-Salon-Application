@@ -1,7 +1,8 @@
 import React, { createContext, useState,useEffect} from 'react'
+import Router from 'next/router'
 //api here is an axios instance which has the baseURL set according to the env.
 import { app } from './config';
-import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut } from "firebase/auth";
 
 
 export const AuthContext = createContext({});
@@ -33,14 +34,14 @@ export const AuthProvider = ({ children }) => {
         return response_data;        
     }
 
-    const logout = (email, password) => {
+    const logout = () => {
         const auth = getAuth();
         signOut(auth).then(() => {
             localStorage.removeItem("Auth_Token");
             setUser(null);        
-            window.location.pathname = '/users/login'
+            Router.push('/admin/adminlogin')
         }).catch((error) => {
-            console.log(error)
+            console.log("Unable to logout:"+error);
         });
         
     }
@@ -63,12 +64,20 @@ export const registerUser=(userfrm)=>{
         console.log(error);
     });
 }
+export const logout = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        localStorage.removeItem("Auth_Token");               
+        Router.push('/admin/adminlogin')
+    }).catch((error) => {
+        console.log("Unable to logout:"+error);
+    });
+    
+}
 export function validate_authentication(){
     const token = localStorage.getItem('Auth_Token')
-    if (!!token) {
-        window.location.pathname = '/admin/dashboard/dashboard'
-    }else{
-        window.location.pathname = '/admin/adminlogin'
+    if (!token) {
+        Router.push('/admin/adminlogin')
     }  
 }
 export const ProtectRoute = ({ children }) => {
@@ -77,7 +86,7 @@ export const ProtectRoute = ({ children }) => {
         if (!!token) {
             return children;
         }else{
-            window.location.pathname = '/admin/adminlogin'
+            Router.push('/admin/adminlogin')
         }
     }
-  };
+};

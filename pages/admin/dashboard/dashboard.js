@@ -1,7 +1,10 @@
 import Backend from '../../../components/layout/backend';
-import { ProtectRoute } from '../../../contexts/auth';
-const dashboard = () => {
-   
+
+import React,{useContext} from "react";
+import { AuthContext } from '../../../contexts/auth'
+
+const dashboard = () => { 
+  const auth = useContext(AuthContext);
 return (
 	<>
     <div className="app-content pt-3 p-md-3 p-lg-4">
